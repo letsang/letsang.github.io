@@ -25,18 +25,21 @@ div {
 
 h1 {
     font-family: Panic;
+    font-weight: normal;
     font-size: 100px;
     text-align: center;
 }
 
 h2 {
     font-family: Panic;
+    font-weight: normal;
     font-size: 30px;
     text-align: center;
 }
 
 p {
     font-family: Futura, sans-serif;
+    font-weight: bold;
     font-size: 20px;
     text-align: center;
 }
