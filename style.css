@@ -1,5 +1,14 @@
+@font-face {
+    font-family: "Panic";
+    src: url("Panic.ttf") format("ttf");
+}
+
 body{
     background-color:#f7929a;
+}
+
+h1{
+    font-family: "Panic";
 }
 
 #container{
