@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Panic";
-    src: url("Panic.ttf") format("truetype");
+    src: url("/Panic.ttf") format("truetype");
 }
 
 body{
