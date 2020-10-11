@@ -15,14 +15,13 @@ h2{
     font-family: Futura, sans-serif;
 }
 
-#container{
-    text-align:center;
+#block1{
+    display:inline;
     width:50%
     margin:auto;
 }
-.block{
-    width:50%;
-    height:50%;
-    padding:20px 20px;
-    display:inline-block;
+#block2{
+    display:inline;
+    width:50%
+    margin:auto;
 }
