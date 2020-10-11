@@ -1,14 +1,18 @@
+body{
+    background-color:#f7929a;
+}
+
 @font-face {
     font-family: Panic;
     src: url("Panic.ttf") format("truetype");
 }
 
-body{
-    background-color:#f7929a;
-}
-
 h1{
     font-family: Panic;
+}
+
+h2{
+    font-family: Futura;
 }
 
 #container{
