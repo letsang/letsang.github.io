@@ -1,5 +1,14 @@
-body{
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
     background-color:#f7929a;
+}
+
+div {
+    width: 50%;
+    height: 50%;
+    float: left;
 }
 
 @font-face {
@@ -13,15 +22,4 @@ h1{
 
 h2{
     font-family: Futura, sans-serif;
-}
-
-#block1{
-    display:inline;
-    width:50%
-    margin:auto;
-}
-#block2{
-    display:inline;
-    width:50%
-    margin:auto;
 }
