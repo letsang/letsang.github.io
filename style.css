@@ -25,14 +25,15 @@ div {
 
 h1 {
     font-family: Panic;
-    font-weight: normal;
+    font-weight: lighter;
     font-size: 100px;
     text-align: center;
+    margin-bottom: 0px;
 }
 
 h2 {
     font-family: Panic;
-    font-weight: normal;
+    font-weight: lighter;
     font-size: 30px;
     text-align: center;
 }
