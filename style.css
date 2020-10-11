@@ -18,19 +18,23 @@ div {
 
 .head {
     height: 100%;
+    margin: auto;
 }
 
 h1 {
     font-family: Panic;
     font-size: 80px;
+    margin: auto;
 }
 
 h2 {
     font-family: Panic;
     font-size: 30px;
+    margin: auto;
 }
 
 p {
     font-family: Futura, sans-serif;
     font-size: 20px;
+    margin: auto;
 }
