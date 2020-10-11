@@ -1,5 +1,5 @@
 @font-face {
-    font-family: "Panic";
+    font-family: Panic;
     src: url("Panic.ttf") format("truetype");
 }
 
@@ -8,7 +8,7 @@ body{
 }
 
 h1{
-    font-family: "Futura";
+    font-family: Futura;
 }
 
 #container{
