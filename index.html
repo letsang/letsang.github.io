@@ -6,9 +6,11 @@
 </head>
 <body>
   
+<script>
 FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
 });
+</script>
   
   <fb:login-button 
   scope="public_profile,email"
