@@ -1,42 +1,265 @@
-<!DOCTYPE html>
+<!--
+    Facebook Javascript SDK Demo
+    Refs:
+        https://developers.facebook.com/docs/javascript/quickstart/v2.0
+        http://hayageek.com/facebook-javascript-sdk/
+        http://pt.slideshare.net/littleq0903/introduction-to-facebook-javascript-sdk-new
+        https://developers.facebook.com/docs/facebook-login/login-flow-for-web/v2.0
+        http://pivotallabs.com/working-with-asynchronously-loaded-javascript/
+    by Fernando Felix
+-->
 <html>
-<head>
-<title>Facebook Login JavaScript Example</title>
-<meta charset="UTF-8">
-</head>
 <body>
-  
+<div id="fb-root"></div>
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>    
+<script id="facebook-jssdk" type="text/javascript" src="//connect.facebook.net/en_US/sdk.js"></script>
+<!-- <script id="facebook-jssdk" type="text/javascript" src="//connect.facebook.net/en_US/sdk/debug.js"></script> -->
+
 <script>
-function checkLoginState() {
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-}
+
+$(document).ready(function(){
+    function facebookReady(){
+        // init metodo do facebook, nenhuma funcao do SDK deve ser chamada anstes dela 
+        FB.init({
+            appId: 'FACEBOOK_APP_ID_AQUI',
+            status: false, // don't get info about the current user after init
+            cookie: true, // enable cookies to allow the server to access the session
+            xfbml: true, // find and initialize any social plugins that have been added using XFBML
+            version: 'v2.0', // determine which Graph API version is used.
+            oauth: true
+        });
+        
+        auth_log(); // opcional
+        
+        
+    }
+
+    if(window.FB) {
+        facebookReady();
+    } else {
+        window.fbAsyncInit = facebookReady;
+    }
+    
+    init_my_app();
+    
+});
+
+
+    function init_my_app(){
+
+        // ref https://developers.facebook.com/docs/reference/javascript/FB.getLoginStatus
+        FB.getLoginStatus(function(response) {
+
+            if(response.status != "connected"){
+                show_login_button();
+            } else {
+                show_profile();
+            }
+
+        });
+
+    }
+
+    function show_login_button(){
+
+        var content = "Login to start the app: <br>";
+        var content = "<button id='login'>Login</button>"
+
+        $("#content").html(content);
+
+        $("button#login").click(function(){
+            login(init_my_app);
+        });
+    }
+
+    function login(func_to_call, scope) {
+        
+        // definindo default permissions
+        // https://developers.facebook.com/docs/facebook-login/permissions/v2.0
+        // obs: Apps that ask for more than public_profile, email and user_friends must be reviewed by Facebook before they can be made available to the general public.
+        // /me/permissions para listar as permissoes do usuario
+        if (typeof(scope) === "undefined"){
+            scope = {
+                scope: "public_profile,email,user_friends,user_photos,user_videos,publish_actions,user_likes",
+                auth_type: "rerequest"
+            };
+        }
+
+        func = function(response) {
+            if (response.authResponse) {
+                func_to_call();
+            } else {
+                console.log("User cancelled login or did not fully authorize.");
+            }
+        };
+
+        FB.login(func, scope);
+
+    }
+
+    function logout() {
+
+        var func = function(){
+            document.location.reload();
+        }
+
+        FB.logout(func);
+    }
+
+    function show_profile(){
+
+        var func = function(response) {
+
+            console.log(JSON.stringify(response));
+
+            var content="Nome: $name <br>".replace("$name", response.name);
+            content +="Link: $link <br>".replace("$link", response.link);
+            content +="Username: $login <br>".replace("$login", response.username);
+            content +="ID: $id <br>".replace("$id", response.id);
+            content +="Email: $email <br>".replace("$email", response.email);
+            content +="<button id='show_picture'> show picture </button>";
+            content +="<button id='show_friends'> show friends </button>";
+            content +="<button id='show_friends'> show friends </button>";
+            content +="<button id='show_message_form'> show message form </button>";
+            content +="<button id='feed_dialog'> lorem ipsum dialog </button>";
+            content +="<button id='logout'> logout </button>";
+
+            $("#content").html(content);
+
+            $( "#show_picture" ).click(function() {
+                show_picture();
+            });
+
+            $("#logout").click(function() {
+                logout();
+            });
+
+            $("#show_friends").click(function() {
+                show_friends();
+            });
+            
+            $("#show_message_form").click(function() {
+                show_message_form();
+            });
+            
+            $("#feed_dialog").click(function() {
+                feed_dialog();
+            });
+
+        }
+
+        FB.api("/me", func)
+        
+    }
+
+    function show_picture() {
+
+        var func = function(response) {
+            var content =" <img src='$url'>".replace("$url", response.data.url);
+            $("#profile_image").html(content);
+        }
+
+        FB.api("/me/picture?type=normal", func);
+    }
+
+    function show_friends(){
+
+        var func = function(response){
+            console.log(response.data);
+        }
+
+        FB.api("/me/friends", func);
+
+    }
+    
+    function show_message_form(){
+        var content = "<input type='text' id='message'><button id='post_message'> enviar </button>";
+        
+        $("#message_content").html(content);
+        
+        $("button#post_message").click(function(e){
+            e.preventDefault();
+            
+            var value = $("input:text#message").val();
+            
+            post_message(value);
+            
+        });
+    
+    }
+    
+    function post_message(message){
+        //@scope publish_actions
+        
+        func = function() {
+            FB.api('/me/feed', 'post', {message: message});
+        };
+        
+        login(func, {scope: "publish_actions"});
+
+    }
+    
+    function feed_dialog(){
+        
+        var dict = {
+            method: 'feed',
+            name: 'Lorem Ipsum',
+            caption: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+            description: (
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+              "Phasellus interdum imperdiet lacus eget consectetur. " +
+              "Vivamus aliquet aliquet pretium."
+            ),
+            link: "http://www.lipsum.com/",
+            picture: "http://www.lipsum.com/images/lipsum07.gif"
+        };
+        
+        var func = function(response) {
+            if (response && response.post_id) {
+                console.log("Post foi publicado com sucesso.")
+            } else {
+                console.log("Post não foi publicado.");
+            }
+        };
+
+        FB.ui(dict, func);
+    }
+    
+    /**
+     * Mostra os logs relacionados a autenticacao no console do browser
+    **/    
+    function auth_log(){
+
+        var func = function(response) {        
+            console.log(response.status);
+        };
+
+        FB.Event.subscribe("auth.authResponseChange", func);
+
+    }
+
 </script>
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
-  
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '222010276129830',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v9.0'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
+<h1>Facebook Javascript SDK Demo</h1>
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
+<div id="content">
+    
+</div>
+    
+<div id="profile_image">
+</div>
+    
+<div id="message_content">
+</div>
+    
+<!-- Usando o SDK para adicionar o Social Plugin "Like button" com o xfbml -->
+<!-- https://developers.facebook.com/docs/plugins -->        
+<div
+  class="fb-like"
+  data-send="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
 
 </body>
 </html>
