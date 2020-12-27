@@ -31,8 +31,6 @@
     function statusChangeCallback(response){
         if(response.status == 'connected'){
             console.log('connected');
-            console.log(response.authResponse.accessToken);
-            <!--location.href = "https://tycheagatha.fr/";-->
             location.href = "https://tycheagatha.fr/" + "?code=" + response.authResponse.accessToken
         } else{
             console.log('disconnected');
