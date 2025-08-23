@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Tap to play: “Disintegration” — The Cure</title>
+<style>
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;margin:0;padding:24px;background:#0f0f0f;color:#fff}
+  h1{font-weight:700;font-size:22px;margin:0 0 16px}
+  p{opacity:.8}
+  .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+  .btn{display:inline-block;padding:14px 16px;border-radius:12px;text-decoration:none;background:#1f1f1f}
+  .btn:active{transform:scale(.98)}
+</style>
+<script>
+(function(){
+  // Track links (The Cure — Disintegration, 2010 Remaster)
+  const L = {
+    appleWeb: 'https://music.apple.com/us/song/disintegration-2010-remaster/372100293',
+    spotifyURI: 'spotify:track:0zY8t5dC1KQXcPUKByWMJM',
+    spotifyWeb: 'https://open.spotify.com/track/0zY8t5dC1KQXcPUKByWMJM',
+    ytmWeb:     'https://music.youtube.com/watch?v=BMOlZtpANa0',
+    // Android Chrome intents with clean web fallbacks
+    intentSpotify:
+      'intent://track/0zY8t5dC1KQXcPUKByWMJM#Intent;scheme=spotify;package=com.spotify.music;S.browser_fallback_url=https%3A%2F%2Fopen.spotify.com%2Ftrack%2F0zY8t5dC1KQXcPUKByWMJM;end',
+    intentYTM:
+      'intent://watch?v=BMOlZtpANa0#Intent;scheme=youtube;package=com.google.android.apps.youtube.music;S.browser_fallback_url=https%3A%2F%2Fmusic.youtube.com%2Fwatch%3Fv%3DBMOlZtpANa0;end'
+  };
+
+  // Optional: remember user’s choice for next time
+  function remember(app){ try{ localStorage.setItem('preferred', app); }catch(_){} }
+  function pref(){ try{ return localStorage.getItem('preferred') || ''; }catch(_) { return '' } }
+
+  function showPicker(){ document.getElementById('picker').style.display='block' }
+
+  // Try to open a URL and resolve true if we seem to leave the page
+  function tryOpen(url, timeout=1200){
+    return new Promise(res=>{
+      let done=false;
+      const timer=setTimeout(()=>{ if(!done){ done=true; res(false);} }, timeout);
+      const onHide=()=>{ if(!done){ done=true; clearTimeout(timer); res(true);} };
+      document.addEventListener('visibilitychange', onHide, { once:true });
+      location.href = url;
+    });
+  }
+
+  async function go(app){
+    remember(app);
+    if(app==='apple') location.href=L.appleWeb;
+    if(app==='spotify') location.href=L.spotifyURI;
+    if(app==='ytm') location.href=L.ytmWeb;
+  }
+
+  async function run(){
+    const ua = navigator.userAgent || '';
+    const isiOS = /iP(hone|ad|od)/.test(ua);
+    const isAndroid = /Android/.test(ua);
+    const p = pref();
+
+    // If the user has picked before, honor it immediately.
+    if(p==='apple') return location.replace(L.appleWeb);
+    if(p==='spotify') return location.replace(isAndroid ? L.intentSpotify : L.spotifyURI);
+    if(p==='ytm') return location.replace(isAndroid ? L.intentYTM : L.ytmWeb);
+
+    if(isiOS){
+      // Best iOS experience: Apple Music universal link (opens app if installed)
+      location.replace(L.appleWeb);
+      // If it didn’t leave Safari (no app or user cancelled), show picker.
+      setTimeout(showPicker, 1500);
+      return;
+    }
+
+    if(isAndroid){
+      // Try Spotify app first, then Apple Music web/app link, then YouTube Music
+      if(await tryOpen(L.intentSpotify, 1500)) return;
+      if(await tryOpen(L.appleWeb, 1200)) return;
+      await tryOpen(L.intentYTM, 1200);
+      setTimeout(showPicker, 1200);
+      return;
+    }
+
+    // Desktop or unknown: show picker
+    showPicker();
+  }
+
+  window.addEventListener('load', run);
+  window.pick = (app)=>go(app);
+})();
+</script>
+</head>
+<body>
+  <h1>Tap to play: “Disintegration” — The Cure</h1>
+  <div id="picker" style="display:none">
+    <p>Choose your player (we’ll remember it):</p>
+    <div class="row">
+      <a class="btn" href="https://music.apple.com/us/song/disintegration-2010-remaster/372100293" onclick="pick('apple')">Open in Apple Music</a>
+      <a class="btn" href="spotify:track:0zY8t5dC1KQXcPUKByWMJM" onclick="pick('spotify')">Open in Spotify</a>
+      <a class="btn" href="https://music.youtube.com/watch?v=BMOlZtpANa0" onclick="pick('ytm')">Open in YouTube Music</a>
+    </div>
+  </div>
+</body>
+</html>
