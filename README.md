@@ -16,3 +16,10 @@ Le contact utilise tsang.jacques@gmail.com, adresse du CV. Le lien des notes ouv
 Le Search Fund est en cours de structuration et le doctorat en préparation. Compléter les mentions légales et faire relire la version chinoise avant publication.
 
 Les fichiers précédents sont conservés dans backup-original/. Aucune publication n’a été effectuée.
+
+## Structure actuelle : cinq slides
+1. Accueil : Search Fund, investisseurs et cédants.
+2. Cédants : continuité et critères de reprise.
+3. Investisseurs : PME française et montage envisagé.
+4. Thèse : capital symbolique et valorisation des actifs.
+5. Entrepreneur : parcours, croissance et lien Rencontrer.

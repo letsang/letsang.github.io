@@ -101,3 +101,35 @@ html{scroll-padding-top:var(--header-height)}
 footer{background:var(--paper);color:var(--muted);padding:14px 0 18px;border:0}
 footer small{font-size:10px;line-height:1.5;letter-spacing:.02em}
 .contact{min-height:calc(100vh - var(--header-height) - 47px);min-height:calc(100svh - var(--header-height) - 47px)}
+
+/* Five-slide composition; the entrepreneur closes with a meeting invitation. */
+.hero,#investisseurs,#entrepreneur{background:var(--paper)}
+#transmission,#recherche{background:#eff1ed}
+.meet{margin-top:28px}
+.meet .cta{display:inline-block;border:1px solid var(--ink);padding:15px 24px;font-size:12px;transition:background .15s,color .15s}
+.meet .cta:hover{background:var(--ink);color:var(--paper)}
+#entrepreneur{min-height:calc(100vh - var(--header-height) - 47px);min-height:calc(100svh - var(--header-height) - 47px)}
+
+/* First-slide actions share a single baseline. */
+.hero .hero-actions{display:flex;align-items:baseline;justify-content:space-between;flex-direction:row;gap:20px;flex-wrap:wrap;margin-top:48px}
+.hero .hero-actions a{font-size:13px;padding-bottom:10px;border-bottom:1px solid var(--ink)}
+@media(max-width:720px){.hero .hero-actions{gap:20px 24px;margin-top:35px}.hero .hero-actions a{font-size:12px}}
+
+/* Transparent persistent header. */
+header{background:transparent}
+
+/* All five slides share the same viewport-based height. */
+main>.hero,main>.section,main>#entrepreneur{
+ min-height:calc(100vh - var(--header-height));
+ min-height:calc(100svh - var(--header-height));
+ padding-top:clamp(35px,6svh,70px);
+ padding-bottom:clamp(35px,6svh,70px);
+}
+main>.section .section-title{margin-bottom:clamp(25px,5svh,45px)}
+
+/* Free scrolling on touch devices and short screens keeps long slides accessible. */
+@media(max-width:720px),(pointer:coarse),(max-height:600px){
+ html{scroll-snap-type:none;scroll-behavior:auto}
+ header,main>.hero,main>.section,footer{scroll-snap-align:none;scroll-snap-stop:normal}
+ main>.hero,main>.section,main>#entrepreneur{height:auto;max-height:none;overflow:visible}
+}
