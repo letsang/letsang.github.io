@@ -1,102 +1,731 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Tap to play: “Disintegration” — The Cure</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LETSANG — Search Fund</title>
+<meta name="description" content="LETSANG est un Search Fund indépendant basé en France. Acquérir des entreprises solides, préserver leur savoir-faire, accompagner leur développement sur le long terme.">
+<link rel="canonical" href="https://www.letsang.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LETSANG">
+<meta property="og:url" content="https://www.letsang.com/">
+<meta property="og:title" content="LETSANG — Bâtir pour durer.">
+<meta property="og:description" content="Search Fund indépendant. Acquérir des entreprises solides. Préserver leur savoir-faire. Accompagner leur développement sur le long terme.">
+<meta property="og:image" content="https://www.letsang.com/images/letsang-cour-1600.jpg">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#111311">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111311'/%3E%3Ctext x='32' y='43' font-family='Futura,Avenir,Arial,sans-serif' font-size='30' fill='%23F3F0E9' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="preload" as="font" type="font/woff2" href="fonts/jost-latin-300-normal.woff2" crossorigin>
+<link rel="preload" as="image" type="image/webp" imagesrcset="images/letsang-cour-800.webp 800w, images/letsang-cour-1600.webp 1600w, images/letsang-cour.webp 2560w" imagesizes="(orientation: portrait) 178vh, 100vw">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"LETSANG","url":"https://www.letsang.com/","description":"Search Fund indépendant basé en France.","address":{"@type":"PostalAddress","addressLocality":"Paris","addressCountry":"FR"}}</script>
+<style>@font-face{font-family:'Jost';font-style:normal;font-weight:300;font-display:swap;src:url(fonts/jost-latin-300-normal.woff2) format('woff2')}@font-face{font-family:'Jost';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/jost-latin-400-normal.woff2) format('woff2')}@font-face{font-family:'Jost';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/jost-latin-500-normal.woff2) format('woff2')}@font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:300;font-display:swap;src:url(fonts/hanken-grotesk-latin-300-normal.woff2) format('woff2')}@font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/hanken-grotesk-latin-400-normal.woff2) format('woff2')}@font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/hanken-grotesk-latin-500-normal.woff2) format('woff2')}@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-mono-latin-400-normal.woff2) format('woff2')}[hidden]{display:none!important}</style>
 <style>
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;margin:0;padding:24px;background:#0f0f0f;color:#fff}
-  h1{font-weight:700;font-size:22px;margin:0 0 16px}
-  p{opacity:.8}
-  .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
-  .btn{display:inline-block;padding:14px 16px;border-radius:12px;text-decoration:none;background:#1f1f1f}
-  .btn:active{transform:scale(.98)}
+/* Grille : 12 colonnes, marges larges ; alternance de plans clairs (pierre) et sombres (noir architectural) ; photographies pleine largeur comme des planches. */
+:root{
+  --noir:#111311;        /* noir architectural */
+  --pierre:#F3F0E9;      /* blanc pierre */
+  --beton:#A5A69F;       /* gris béton */
+  --anthracite:#454743;  /* gris anthracite */
+  --filet:#D9D6CE;       /* filet sur pierre (béton dilué) */
+  --filet-sombre:#2B2D2A;/* filet sur noir */
+  --display:"Jost","Futura","Avenir Next","Century Gothic",sans-serif;
+  --body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --g:clamp(20px,5.5vw,96px);
+  --maxw:1440px;
+  --ease:cubic-bezier(.22,.61,.24,1);
+  --head:76px;
+  color-scheme:light;
+}
+/* Plans : chaque section déclare son fond ; les composants lisent --bg/--fg/--sub/--line. */
+.light{--bg:var(--pierre);--fg:var(--noir);--sub:var(--anthracite);--line:var(--filet);background:var(--bg);color:var(--fg)}
+.dark{--bg:var(--noir);--fg:var(--pierre);--sub:var(--beton);--line:var(--filet-sombre);background:var(--bg);color:var(--fg)}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--pierre);color:var(--noir);font-family:var(--body);font-size:17px;line-height:1.7;font-weight:300;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%;display:block}
+a{color:inherit}
+::selection{background:var(--noir);color:var(--pierre)}
+:focus-visible{outline:1px solid currentColor;outline-offset:5px}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--g)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2.4vw,40px)}
+
+/* ---------- Typographie ---------- */
+h1,h2,h3{font-family:var(--display);font-weight:300;margin:0;text-wrap:balance;letter-spacing:-.015em}
+h1{font-size:clamp(46px,8vw,128px);line-height:.98}
+h2{font-size:clamp(34px,4.6vw,72px);line-height:1.04}
+h3{font-size:clamp(22px,2vw,28px);line-height:1.2;font-weight:400;letter-spacing:0}
+p{margin:0;max-width:60ch}
+.lead{font-size:clamp(18px,1.55vw,22px);line-height:1.6}
+.sub{color:var(--sub)}
+.label{font-family:var(--display);font-weight:500;font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--sub)}
+.plate-cap{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--sub);display:flex;justify-content:space-between;gap:16px;padding-top:14px}
+
+/* ---------- Liens ---------- */
+.lnk{display:inline-flex;align-items:baseline;gap:.5em;font-family:var(--display);font-weight:400;font-size:15px;letter-spacing:.06em;text-decoration:none;padding-bottom:6px;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;transition:background-size .5s var(--ease)}
+.lnk:hover{background-size:0% 1px;background-position:100% 100%}
+.lnk .ar{display:inline-block;transition:transform .4s var(--ease)}
+.lnk:hover .ar{transform:translate(2px,-2px)}
+
+/* ---------- En-tête ---------- */
+header.top{position:fixed;inset:0 0 auto 0;z-index:30;padding-top:env(safe-area-inset-top,0px);color:var(--noir);background:var(--pierre);border-bottom:1px solid var(--filet);transition:background .45s var(--ease),color .45s var(--ease),border-color .45s var(--ease)}
+header.top.over{background:transparent;color:var(--pierre);border-bottom-color:rgba(243,240,233,.18)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:var(--head);gap:24px}
+.logo{font-family:var(--display);font-weight:500;font-size:15px;letter-spacing:.42em;margin-right:-.42em;text-decoration:none;white-space:nowrap}
+nav.main{display:flex;gap:clamp(18px,2.6vw,40px)}
+nav.main a{font-family:var(--display);font-size:13.5px;letter-spacing:.06em;text-decoration:none;opacity:.72;padding-block:6px;transition:opacity .3s;position:relative}
+nav.main a:hover,nav.main a[aria-current="page"]{opacity:1}
+nav.main a[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor}
+.menu-btn{display:none;background:none;border:0;color:inherit;font:500 11.5px var(--display);letter-spacing:.28em;text-transform:uppercase;cursor:pointer;padding:12px 0}
+@media (max-width:980px){
+  .menu-btn{display:block}
+  nav.main{position:fixed;inset:calc(var(--head) + env(safe-area-inset-top,0px)) 0 0 0;flex-direction:column;gap:0;background:var(--noir);color:var(--pierre);padding:24px var(--g);visibility:hidden;opacity:0;transition:opacity .35s var(--ease),visibility 0s .35s}
+  nav.main.open{visibility:visible;opacity:1;transition:opacity .35s var(--ease)}
+  nav.main a{font-size:clamp(28px,7vw,40px);font-weight:300;opacity:1;padding:14px 0;border-bottom:1px solid var(--filet-sombre);letter-spacing:-.01em}
+  nav.main a[aria-current="page"]::after{display:none}
+  nav.main a[aria-current="page"]{color:var(--beton)}
+}
+
+/* ---------- Pages ---------- */
+.page{display:none}
+.page.active{display:block;animation:fade .6s var(--ease) both}
+@keyframes fade{from{opacity:.001}to{opacity:1}}
+section{position:relative}
+.pad{padding-block:clamp(88px,12vw,184px)}
+.rule-top{border-top:1px solid var(--line)}
+
+/* Hero d'accueil */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:var(--pierre);background:var(--noir);overflow:hidden}
+.hero picture,.hero picture img{position:absolute;inset:0;width:100%;height:100%}
+.hero picture img{object-fit:cover;object-position:52% 50%}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(17,19,17,.2);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;width:100%;padding-bottom:clamp(64px,9vh,112px);padding-top:calc(var(--head) + 48px)}
+.hero h1{font-size:clamp(52px,9vw,148px);text-shadow:0 0 40px rgba(17,19,17,.18)}
+.hero .sub-hero{display:grid;gap:28px;margin-top:clamp(20px,2.6vw,36px);max-width:620px}
+.hero .sub-hero p{font-size:clamp(17px,1.4vw,20px);line-height:1.6;color:rgba(243,240,233,.86)}
+.scroll-cue{z-index:1;position:absolute;left:50%;bottom:0;width:1px;height:56px;background:rgba(243,240,233,.5);transform-origin:top}
+.hero-cap{z-index:1;position:absolute;right:var(--g);bottom:clamp(64px,9vh,112px);font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:rgba(243,240,233,.62);text-align:right}
+@media (max-width:760px){.hero-cap{display:none}.hero picture img{object-position:24% 50%}.hero::after{background:rgba(17,19,17,.34)}}
+
+/* Planches photographiques */
+.plate{overflow:hidden;background:var(--anthracite);position:relative}
+.plate img{width:100%;height:100%;object-fit:cover}
+.plate.pano{aspect-ratio:2400/1030;max-height:86vh;width:100%}
+.plate.wide{aspect-ratio:16/9;max-height:80vh}
+.plate.tall{aspect-ratio:4/5}
+.bleed{width:100%}
+
+/* En-têtes intérieurs */
+.page-head{padding-top:calc(var(--head) + clamp(80px,11vw,168px));padding-bottom:clamp(56px,7vw,104px)}
+.page-head .grid{row-gap:32px;align-items:end}
+.page-head .t{grid-column:1 / span 8}
+.page-head .d{grid-column:9 / span 4}
+.page-head .label{grid-column:1 / -1}
+@media (max-width:900px){.page-head .t,.page-head .d{grid-column:1 / -1}}
+
+/* Composition titre / texte */
+.split{row-gap:32px}
+.split .l{grid-column:1 / span 4}
+.split .r{grid-column:6 / span 7;display:grid;gap:28px;align-content:start}
+@media (max-width:900px){.split .l,.split .r{grid-column:1 / -1}}
+
+/* Trois principes */
+.tri{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.tri > div{padding:40px 40px 8px 0;display:grid;gap:16px;align-content:start}
+.tri > div + div{padding-left:40px;border-left:1px solid var(--line)}
+.tri .verb{font-family:var(--display);font-weight:300;font-size:clamp(34px,3.4vw,52px);line-height:1;letter-spacing:-.01em}
+.tri .how{font-family:var(--display);font-size:15px;letter-spacing:.06em;color:var(--sub)}
+.tri p{color:var(--sub);font-size:16px}
+.tri ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:10px;font-size:15px;color:var(--sub)}
+.tri li{padding-top:10px;border-top:1px solid var(--line)}
+@media (max-width:900px){.tri{grid-template-columns:1fr}.tri > div,.tri > div + div{padding:32px 0;border-left:0}.tri > div + div{border-top:1px solid var(--line)}}
+
+/* Fiche critères */
+.sheet{margin:0;border-top:1px solid var(--fg)}
+.sheet .row{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:24px;padding:26px 0;border-bottom:1px solid var(--line)}
+.sheet dt{font-family:var(--display);font-weight:500;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--sub);padding-top:6px}
+.sheet dd{margin:0;display:grid;gap:4px}
+.sheet dd b{font-weight:400}
+.sheet dd span{color:var(--sub);font-size:15.5px}
+.sheet dd .fig,.fig{font-family:var(--display);font-weight:300;font-size:clamp(34px,3.6vw,52px);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+@media (max-width:640px){.sheet .row{grid-template-columns:1fr;gap:8px}}
+.scale{margin-top:20px;max-width:460px}
+.scale .track{position:relative;height:1px;background:var(--line);margin-bottom:10px}
+.scale .band{position:absolute;top:-2px;height:5px;background:var(--fg)}
+.scale .ticks{position:relative;height:16px;font-family:var(--mono);font-size:11px;color:var(--sub);font-variant-numeric:tabular-nums}
+.scale .ticks span{position:absolute;transform:translateX(-50%)}
+.scale .ticks span:first-child{transform:none}
+.scale .ticks span:last-child{transform:translateX(-100%)}
+.fine{font-size:13.5px;color:var(--sub);max-width:72ch}
+
+/* Diptyque photo / texte */
+.dip{align-items:center;row-gap:48px}
+.dip .ph{grid-column:1 / span 5}
+.dip .tx{grid-column:7 / span 6;display:grid;gap:28px}
+@media (max-width:900px){.dip .ph,.dip .tx{grid-column:1 / -1}}
+blockquote{margin:0;font-family:var(--display);font-weight:300;font-size:clamp(30px,3.4vw,52px);line-height:1.14;letter-spacing:-.01em;text-wrap:balance}
+
+/* Engagements cédants */
+.commit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(24px,3vw,56px)}
+.commit > div{padding-block:32px 40px;border-top:1px solid var(--line);display:grid;gap:12px;align-content:start}
+.commit p{color:var(--sub);font-size:16px}
+@media (max-width:980px){.commit{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.commit{grid-template-columns:1fr}}
+
+/* Étapes Search Fund (séquence réelle) */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
+.steps > div{padding:32px 28px 8px 0;display:grid;gap:12px;align-content:start}
+.steps > div + div{padding-left:28px;border-left:1px solid var(--line)}
+.steps .n{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--sub)}
+.steps p{color:var(--sub);font-size:15.5px}
+@media (max-width:980px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.steps > div:nth-child(3){padding-left:0;border-left:0}.steps > div:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}.steps > div,.steps > div + div{padding:28px 0;border-left:0}.steps > div + div{border-top:1px solid var(--line)}}
+
+.facts{margin:0;border-top:1px solid var(--line)}
+.facts div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:16px;padding:18px 0;border-bottom:1px solid var(--line);font-size:15.5px}
+.facts dt{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--sub);padding-top:4px}
+.facts dd{margin:0}
+@media (max-width:560px){.facts div{grid-template-columns:1fr;gap:4px}}
+
+/* À propos */
+.portrait{aspect-ratio:4/5;max-width:100%;background:#E6E3DB;border:1px solid var(--filet);display:grid;place-items:center;position:relative;overflow:hidden}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05)}
+.portrait .ph{display:grid;gap:10px;justify-items:center;text-align:center;padding:24px}
+.portrait .ph span{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--anthracite)}
+.pick{background:none;border:0;border-bottom:1px solid var(--noir);font:400 13px var(--display);letter-spacing:.08em;color:var(--noir);cursor:pointer;padding:0 0 4px}
+.editable{border-top:1px solid var(--line);padding-top:20px;display:grid;gap:12px}
+.editable [contenteditable]{outline:none}
+.editable [contenteditable]:focus,#founderName:focus{background:#E9E6DE;outline:none}
+
+/* Contact */
+.contact{row-gap:56px}
+.contact .info{grid-column:1 / span 4;display:grid;gap:36px;align-content:start}
+.contact form{grid-column:6 / span 7}
+@media (max-width:900px){.contact .info,.contact form{grid-column:1 / -1}}
+form{display:grid;gap:30px}
+.audience{display:flex;flex-wrap:wrap;gap:8px;border:0;padding:0;margin:0}
+.audience legend{margin-bottom:14px;padding:0}
+.audience input{position:absolute;opacity:0;pointer-events:none}
+.audience label{border:1px solid var(--line);padding:10px 16px;font-family:var(--display);font-size:14px;cursor:pointer;transition:border-color .25s,background .25s,color .25s}
+.audience label:hover{border-color:var(--fg)}
+.audience input:checked + label{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.audience input:focus-visible + label{outline:1px solid var(--fg);outline-offset:3px}
+.field{display:grid;gap:8px}
+.field input,.field textarea{font:inherit;font-size:17px;font-weight:400;color:var(--fg);background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:8px 0 12px;transition:border-color .3s}
+.field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--fg)}
+.field textarea{min-height:130px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+@media (max-width:560px){.two{grid-template-columns:1fr}}
+.submit{justify-self:start;background:transparent;color:var(--fg);border:1px solid var(--fg);padding:16px 30px;font:400 13px var(--display);letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:background .35s var(--ease),color .35s var(--ease)}
+.submit:hover{background:var(--fg);color:var(--bg)}
+.confirm{border-top:1px solid var(--fg);padding-top:16px;font-size:15px}
+.addr{font-family:var(--display);font-weight:300;font-size:clamp(24px,2.4vw,32px);user-select:all;overflow-wrap:anywhere}
+.copy{background:none;border:0;padding:0 0 3px;border-bottom:1px solid var(--line);font:400 12px var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--sub);cursor:pointer}
+.copy:hover{color:var(--fg);border-color:var(--fg)}
+
+/* Appel de fin */
+.closing h2{font-size:clamp(40px,6.6vw,104px)}
+.closing .grid{row-gap:40px;align-items:end}
+.closing .t{grid-column:1 / span 9}
+.closing .a{grid-column:10 / span 3;justify-self:end}
+@media (max-width:900px){.closing .t,.closing .a{grid-column:1 / -1;justify-self:start}}
+
+/* Pied de page */
+footer{padding-block:clamp(72px,9vw,128px) 40px}
+footer .grid{row-gap:48px}
+footer .brand{grid-column:1 / span 5;display:grid;gap:28px;align-content:start}
+footer .brand .logo{font-size:clamp(22px,2.4vw,30px)}
+footer .sig{width:72px;height:auto;border:1px solid var(--filet-sombre)}
+footer .links{grid-column:7 / span 3;display:grid;gap:10px;align-content:start}
+footer .links a{font-family:var(--display);font-size:15px;text-decoration:none;color:var(--sub);transition:color .3s}
+footer .links a:hover{color:var(--fg)}
+footer .legal{grid-column:10 / span 3;font-size:12.5px;line-height:1.7;color:var(--sub);display:grid;gap:14px;align-content:start}
+footer .base{grid-column:1 / -1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:24px;font-family:var(--mono);font-size:11px;color:var(--sub)}
+@media (max-width:900px){footer .brand,footer .links,footer .legal{grid-column:1 / -1}}
+
+/* ---------- Mouvement ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .scroll-cue{animation:cue 2.8s var(--ease) infinite}
+  @keyframes cue{0%{transform:scaleY(0)}45%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+  .hero picture img{animation:settle 2.4s var(--ease) both}
+  @keyframes settle{from{transform:scale(1.045)}to{transform:scale(1)}}
+  @supports (animation-timeline: view()){
+    .plate img{animation:drift linear both;animation-timeline:view();scale:1.1}
+    @keyframes drift{from{translate:0 -4%}to{translate:0 4%}}
+    .rv{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+    @keyframes rise{from{opacity:.15;translate:0 28px}to{opacity:1;translate:0 0}}
+  }
+}
+@media (prefers-reduced-motion:reduce){.page.active{animation:none}}
 </style>
-<script>
-(function(){
-  // Track links (The Cure — Disintegration, 2010 Remaster)
-  const L = {
-    appleWeb: 'https://music.apple.com/fr/album/disintegration/1440785740?i=1440786193',
-    spotifyURI: 'spotify:track:0zY8t5dC1KQXcPUKByWMJM',
-    spotifyWeb: 'https://open.spotify.com/track/0zY8t5dC1KQXcPUKByWMJM',
-    ytmWeb:     'https://music.youtube.com/watch?v=BMOlZtpANa0',
-    // Android Chrome intents with clean web fallbacks
-    intentSpotify:
-      'intent://track/0zY8t5dC1KQXcPUKByWMJM#Intent;scheme=spotify;package=com.spotify.music;S.browser_fallback_url=https%3A%2F%2Fopen.spotify.com%2Ftrack%2F0zY8t5dC1KQXcPUKByWMJM;end',
-    intentYTM:
-      'intent://watch?v=BMOlZtpANa0#Intent;scheme=youtube;package=com.google.android.apps.youtube.music;S.browser_fallback_url=https%3A%2F%2Fmusic.youtube.com%2Fwatch%3Fv%3DBMOlZtpANa0;end'
-  };
 
-  // Optional: remember user’s choice for next time
-  function remember(app){ try{ localStorage.setItem('preferred', app); }catch(_){} }
-  function pref(){ try{ return localStorage.getItem('preferred') || ''; }catch(_) { return '' } }
-
-  function showPicker(){ document.getElementById('picker').style.display='block' }
-
-  // Try to open a URL and resolve true if we seem to leave the page
-  function tryOpen(url, timeout=1200){
-    return new Promise(res=>{
-      let done=false;
-      const timer=setTimeout(()=>{ if(!done){ done=true; res(false);} }, timeout);
-      const onHide=()=>{ if(!done){ done=true; clearTimeout(timer); res(true);} };
-      document.addEventListener('visibilitychange', onHide, { once:true });
-      location.href = url;
-    });
-  }
-
-  async function go(app){
-    remember(app);
-    if(app==='apple') location.href=L.appleWeb;
-    if(app==='spotify') location.href=L.spotifyURI;
-    if(app==='ytm') location.href=L.ytmWeb;
-  }
-
-  async function run(){
-    const ua = navigator.userAgent || '';
-    const isiOS = /iP(hone|ad|od)/.test(ua);
-    const isAndroid = /Android/.test(ua);
-    const p = pref();
-
-    // If the user has picked before, honor it immediately.
-    if(p==='apple') return location.replace(L.appleWeb);
-    if(p==='spotify') return location.replace(isAndroid ? L.intentSpotify : L.spotifyURI);
-    if(p==='ytm') return location.replace(isAndroid ? L.intentYTM : L.ytmWeb);
-
-    if(isiOS){
-      // Best iOS experience: Apple Music universal link (opens app if installed)
-      location.replace(L.appleWeb);
-      // If it didn’t leave Safari (no app or user cancelled), show picker.
-      setTimeout(showPicker, 1500);
-      return;
-    }
-
-    if(isAndroid){
-      // Try Spotify app first, then Apple Music web/app link, then YouTube Music
-      if(await tryOpen(L.intentSpotify, 1500)) return;
-      if(await tryOpen(L.appleWeb, 1200)) return;
-      await tryOpen(L.intentYTM, 1200);
-      setTimeout(showPicker, 1200);
-      return;
-    }
-
-    // Desktop or unknown: show picker
-    showPicker();
-  }
-
-  window.addEventListener('load', run);
-  window.pick = (app)=>go(app);
-})();
-</script>
 </head>
 <body>
-  <h1>Tap to play: “Disintegration” — The Cure</h1>
-  <div id="picker" style="display:none">
-    <p>Choose your player (we’ll remember it):</p>
-    <div class="row">
-      <a class="btn" href="https://music.apple.com/fr/album/disintegration/1440785740?i=1440786193" onclick="pick('apple')">Open in Apple Music</a>
-      <a class="btn" href="spotify:track:0zY8t5dC1KQXcPUKByWMJM" onclick="pick('spotify')">Open in Spotify</a>
-      <a class="btn" href="https://music.youtube.com/watch?v=BMOlZtpANa0" onclick="pick('ytm')">Open in YouTube Music</a>
-    </div>
+<header class="top" id="top">
+  <div class="wrap">
+    <a href="#accueil" class="logo" data-go="accueil" aria-label="LETSANG — accueil">LETSANG</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+    <nav class="main" id="mainNav" aria-label="Navigation principale">
+      <a href="#approche" data-go="approche">Approche</a>
+      <a href="#criteres" data-go="criteres">Critères</a>
+      <a href="#apropos" data-go="apropos">À propos</a>
+      <a href="#cedants" data-go="cedants">Cédants</a>
+      <a href="#investisseurs" data-go="investisseurs">Investisseurs</a>
+      <a href="#contact" data-go="contact">Contact</a>
+    </nav>
   </div>
+</header>
+
+<main>
+
+<!-- ======================= ACCUEIL ======================= -->
+<div class="page active" data-page="accueil">
+  <section class="hero" aria-label="LETSANG">
+    <picture>
+      <source type="image/webp" srcset="images/letsang-cour-800.webp 800w, images/letsang-cour-1600.webp 1600w, images/letsang-cour.webp 2560w" sizes="(orientation: portrait) 178vh, 100vw">
+      <img src="images/letsang-cour-1600.jpg" srcset="images/letsang-cour-800.jpg 800w, images/letsang-cour-1600.jpg 1600w, images/letsang-cour.jpg 2560w" sizes="(orientation: portrait) 178vh, 100vw" width="2560" height="1440" alt="Cour minérale bordée de murs en pierre, lumière rasante en fin de journée" fetchpriority="high">
+    </picture>
+    <div class="wrap">
+      <h1>Bâtir pour durer.</h1>
+      <div class="sub-hero">
+        <p>Acquérir des entreprises solides. Préserver leur savoir-faire. Accompagner leur développement sur le long terme.</p>
+        <div><a class="lnk" href="#approche" data-go="approche">Découvrir notre approche <span class="ar">↗</span></a></div>
+      </div>
+    </div>
+    <div class="hero-cap">Search Fund indépendant<br>France</div>
+    <span class="scroll-cue" aria-hidden="true"></span>
+  </section>
+
+  <section class="light pad">
+    <div class="wrap grid split">
+      <div class="l"><span class="label">Notre vision</span></div>
+      <div class="r rv">
+        <h2>Une entreprise. Un dirigeant. Un horizon long.</h2>
+        <p class="lead">LETSANG est un Search Fund indépendant. Sa vocation est d'identifier une PME française rentable, d'en reprendre la direction et de la développer durablement.</p>
+        <p class="sub">Nous recherchons des entreprises au savoir-faire reconnu et au modèle économique solide, dont une part du potentiel reste à exploiter. Le repreneur s'engage personnellement dans l'opérationnel, aux côtés des équipes en place.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark pad">
+    <div class="wrap">
+      <div class="grid split" style="margin-bottom:clamp(56px,6vw,96px)">
+        <div class="l"><span class="label">Notre approche de l'acquisition</span></div>
+        <div class="r"><h2 class="rv">Trois principes, appliqués à chaque décision.</h2></div>
+      </div>
+      <div class="tri rv">
+        <div><span class="verb">Acquérir</span><span class="how">avec discernement</span><p>Identifier des entreprises disposant de fondamentaux solides et d'un potentiel durable.</p></div>
+        <div><span class="verb">Développer</span><span class="how">avec exigence</span><p>Renforcer la performance financière, les opérations, la stratégie commerciale et le positionnement.</p></div>
+        <div><span class="verb">Transmettre</span><span class="how">avec respect</span><p>Préserver l'histoire de l'entreprise, ses collaborateurs et son savoir-faire.</p></div>
+      </div>
+      <p style="margin-top:56px"><a class="lnk" href="#approche" data-go="approche">Notre approche <span class="ar">↗</span></a></p>
+    </div>
+  </section>
+
+  <section class="dark">
+    <figure class="bleed" style="margin:0">
+      <div class="plate pano"><picture>
+        <source type="image/webp" srcset="images/letsang-beton-eau-800.webp 800w, images/letsang-beton-eau-1200.webp 1200w, images/letsang-beton-eau.webp 2400w" sizes="100vw">
+        <img src="images/letsang-beton-eau-1200.jpg" srcset="images/letsang-beton-eau-800.jpg 800w, images/letsang-beton-eau-1200.jpg 1200w, images/letsang-beton-eau.jpg 2400w" sizes="100vw" width="2400" height="1030" loading="lazy" alt="Mur en béton banché et bassin, ombre portée diagonale">
+      </picture></div>
+      <figcaption class="wrap plate-cap" style="padding-bottom:20px"><span>Béton banché, eau, lumière rasante</span><span>LETSANG</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="light pad">
+    <div class="wrap grid split">
+      <div class="l"><span class="label">Les entreprises que nous recherchons</span></div>
+      <div class="r rv">
+        <h2>Des PME établies, rentables, ancrées dans un métier.</h2>
+        <dl class="sheet">
+          <div class="row"><dt>Localisation</dt><dd><b>France</b></dd></div>
+          <div class="row"><dt>EBITDA indicatif</dt><dd><span class="fig" style="color:var(--fg)">0,5 – 1,5 M€</span></dd></div>
+          <div class="row"><dt>Profil</dt><dd><b>Activité rentable, trésorerie récurrente, clientèle fidèle</b></dd></div>
+          <div class="row"><dt>Situation</dt><dd><b>Transmission entrepreneuriale, majorité privilégiée</b></dd></div>
+        </dl>
+        <p><a class="lnk" href="#criteres" data-go="criteres">L'ensemble des critères <span class="ar">↗</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark pad">
+    <div class="wrap grid dip">
+      <div class="ph">
+        <div class="plate tall"><picture>
+          <source type="image/webp" srcset="images/letsang-fente-lumiere-800.webp 800w, images/letsang-fente-lumiere.webp 1200w" sizes="(max-width:900px) 100vw, 40vw">
+          <img src="images/letsang-fente-lumiere-800.jpg" srcset="images/letsang-fente-lumiere-800.jpg 800w, images/letsang-fente-lumiere.jpg 1200w" sizes="(max-width:900px) 100vw, 40vw" width="1200" height="1500" loading="lazy" alt="Fente de lumière dans un mur de béton, intérieur sombre">
+        </picture></div>
+        <div class="plate-cap"><span>Fente, intérieur, béton</span></div>
+      </div>
+      <div class="tx rv">
+        <span class="label">Un partenaire pour les dirigeants</span>
+        <blockquote>Transmettre une entreprise, c'est confier une histoire, des équipes et des clients.</blockquote>
+        <p class="sub">Chaque discussion est conduite dans la confidentialité et au rythme du cédant. Notre priorité est d'assurer la continuité de l'entreprise, puis de la faire grandir.</p>
+        <p><a class="lnk" href="#cedants" data-go="cedants">Vous envisagez de transmettre <span class="ar">↗</span></a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="light pad closing">
+    <div class="wrap grid">
+      <div class="t rv"><span class="label">Contact</span><h2 style="margin-top:28px">Engager une conversation.</h2></div>
+      <div class="a"><a class="lnk" href="#contact" data-go="contact">Nous écrire <span class="ar">↗</span></a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= APPROCHE ======================= -->
+<div class="page" data-page="approche">
+  <section class="light page-head">
+    <div class="wrap grid">
+      <span class="label">Notre approche</span>
+      <h1 class="t">Une démarche d'entrepreneur, une rigueur d'investisseur.</h1>
+      <p class="d sub">Un Search Fund ne gère pas un portefeuille. Il concentre ses efforts sur une seule entreprise, dont le repreneur devient le dirigeant.</p>
+    </div>
+  </section>
+  <section class="light">
+    <div class="plate wide"><picture>
+      <source type="image/webp" srcset="images/letsang-volumes-800.webp 800w, images/letsang-volumes-1200.webp 1200w, images/letsang-volumes.webp 1800w" sizes="100vw">
+      <img src="images/letsang-volumes-1200.jpg" srcset="images/letsang-volumes-800.jpg 800w, images/letsang-volumes-1200.jpg 1200w, images/letsang-volumes.jpg 1800w" sizes="100vw" width="1800" height="1240" loading="lazy" alt="Volumes de béton superposés et escalier, ombres franches">
+    </picture></div>
+    <div class="wrap plate-cap"><span>Volumes superposés</span><span>Acquérir · Développer · Transmettre</span></div>
+  </section>
+  <section class="dark pad" style="margin-top:clamp(64px,8vw,120px)">
+    <div class="wrap">
+      <div class="tri">
+        <div>
+          <span class="verb">Acquérir</span><span class="how">avec discernement</span>
+          <p>Identifier des entreprises disposant de fondamentaux solides et d'un potentiel durable.</p>
+          <ul><li>Analyse approfondie du métier et du marché</li><li>Qualité et récurrence des flux de trésorerie</li><li>Valorisation raisonnable, structure financière prudente</li></ul>
+        </div>
+        <div>
+          <span class="verb">Développer</span><span class="how">avec exigence</span>
+          <p>Renforcer la performance financière, les opérations, la stratégie commerciale et le positionnement.</p>
+          <ul><li>Pilotage financier et reporting</li><li>Structuration commerciale, développement de l'offre</li><li>Efficacité opérationnelle et organisation</li></ul>
+        </div>
+        <div>
+          <span class="verb">Transmettre</span><span class="how">préserver, puis transmettre</span>
+          <p>Respecter l'histoire de l'entreprise, ses collaborateurs et son savoir-faire, tout en préparant sa prochaine phase de développement.</p>
+          <ul><li>Continuité des équipes et des relations clients</li><li>Transition organisée avec le cédant</li><li>Vision de long terme pour l'entreprise</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="light pad">
+    <div class="wrap grid split">
+      <div class="l"><span class="label">Après l'acquisition</span></div>
+      <div class="r rv">
+        <h2>Les premiers mois sont consacrés à l'écoute.</h2>
+        <p class="sub">Avant toute évolution, le repreneur prend le temps de comprendre l'entreprise de l'intérieur : ses équipes, ses clients, ses fournisseurs et ce qui fait sa singularité. Les priorités de développement sont ensuite définies sur la base de ce diagnostic partagé, puis mises en œuvre progressivement.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= CRITÈRES ======================= -->
+<div class="page" data-page="criteres">
+  <section class="light page-head">
+    <div class="wrap grid">
+      <span class="label">Critères d'investissement</span>
+      <h1 class="t">Ce que nous recherchons.</h1>
+      <p class="d sub">Ces critères sont indicatifs. Ils décrivent le profil d'entreprise que LETSANG souhaite acquérir et ne font référence à aucune opération réalisée.</p>
+    </div>
+  </section>
+  <section class="light">
+    <div class="plate wide"><picture>
+      <source type="image/webp" srcset="images/letsang-facade-rythme-800.webp 800w, images/letsang-facade-rythme-1200.webp 1200w, images/letsang-facade-rythme.webp 1800w" sizes="100vw">
+      <img src="images/letsang-facade-rythme-1200.jpg" srcset="images/letsang-facade-rythme-800.jpg 800w, images/letsang-facade-rythme-1200.jpg 1200w, images/letsang-facade-rythme.jpg 1800w" sizes="100vw" width="1800" height="1240" loading="lazy" alt="Façade rythmée de lames verticales en béton, ombres régulières">
+    </picture></div>
+    <div class="wrap plate-cap"><span>Façade, rythme et mesure</span></div>
+  </section>
+  <section class="light pad">
+    <div class="wrap">
+      <dl class="sheet">
+        <div class="row"><dt>Géographie</dt><dd><b>Entreprises françaises établies</b><span>Un historique d'activité significatif et une position reconnue sur leur marché.</span></dd></div>
+        <div class="row"><dt>Rentabilité</dt><dd><b>Activité rentable et flux de trésorerie récurrents</b><span>Une performance régulière, portée par des revenus prévisibles.</span></dd></div>
+        <div class="row"><dt>Taille</dt><dd>
+          <span class="fig" style="color:var(--fg)">EBITDA 0,5 – 1,5 M€</span>
+          <div class="scale" aria-hidden="true">
+            <div class="track"><div class="band" style="left:16.67%;width:33.33%"></div></div>
+            <div class="ticks"><span style="left:0">0</span><span style="left:16.67%">0,5</span><span style="left:50%">1,5</span><span style="left:100%">3,0 M€</span></div>
+          </div>
+          <span>Fourchette indicative.</span>
+        </dd></div>
+        <div class="row"><dt>Positionnement</dt><dd><b>Savoir-faire différenciant et clientèle fidèle</b><span>Une expertise métier, technique ou artisanale difficile à reproduire.</span></dd></div>
+        <div class="row"><dt>Situation</dt><dd><b>Opportunité de transmission entrepreneuriale</b><span>Départ à la retraite, absence de successeur familial, recentrage du dirigeant.</span></dd></div>
+        <div class="row"><dt>Potentiel</dt><dd><b>Amélioration opérationnelle et commerciale</b><span>Structuration, digitalisation, développement commercial, export.</span></dd></div>
+        <div class="row"><dt>Structure</dt><dd><b>Acquisition majoritaire privilégiée</b><span>Avec la possibilité d'un accompagnement du cédant pendant une période de transition.</span></dd></div>
+      </dl>
+      <p class="fine" style="margin-top:28px">Hors périmètre, à titre indicatif : entreprises en forte difficulté financière, start-up sans historique de rentabilité, immobilier patrimonial, activités spéculatives.</p>
+    </div>
+  </section>
+  <section class="dark pad closing">
+    <div class="wrap grid">
+      <div class="t"><span class="label">Conseils et intermédiaires</span><h2 style="margin-top:28px">Un dossier correspond à ces critères ?</h2><p class="sub" style="margin-top:24px">Conseils M&amp;A, experts-comptables, avocats, banquiers : chaque présentation est étudiée avec attention.</p></div>
+      <div class="a"><a class="lnk" href="#contact" data-go="contact">Soumettre une opportunité <span class="ar">↗</span></a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= À PROPOS ======================= -->
+<div class="page" data-page="apropos">
+  <section class="light page-head">
+    <div class="wrap grid">
+      <span class="label">À propos</span>
+      <h1 class="t">Le fondateur.</h1>
+    </div>
+  </section>
+  <section class="light" style="padding-bottom:clamp(88px,12vw,184px)">
+    <div class="wrap grid dip" style="align-items:start">
+      <div class="ph">
+        <!-- PHOTOGRAPHIE : remplacer le bloc .ph par <img src="images/portrait.jpg" alt="Portrait du fondateur"> -->
+        <div class="portrait" id="portrait">
+          <div class="ph">
+            <span>Portrait · 4:5 · noir et blanc</span>
+            <label class="pick" for="photoInput">Choisir une image</label>
+            <input type="file" id="photoInput" accept="image/*" hidden>
+          </div>
+        </div>
+      </div>
+      <div class="tx" style="align-self:start">
+        <h2 contenteditable="true" spellcheck="false" id="founderName" style="outline:none">Prénom Nom</h2>
+        <p class="lead">Professionnel expérimenté du pilotage financier, de la planification et de la performance commerciale, le fondateur de LETSANG a construit son parcours dans le secteur du luxe, au croisement de la finance, des opérations et de l'analyse de données.</p>
+        <p class="sub">Formé à la finance au niveau supérieur, il aborde la reprise d'entreprise avec une double exigence : la rigueur de l'analyse financière et la compréhension concrète des métiers, des produits et des clients.</p>
+        <dl class="facts">
+          <div><dt>Expertise</dt><dd>Pilotage financier, planification, analyse de la performance</dd></div>
+          <div><dt>Secteur</dt><dd>Luxe</dd></div>
+          <div><dt>Formation</dt><dd>Formation supérieure en finance</dd></div>
+        </dl>
+        <!-- PARCOURS DÉTAILLÉ : section éditable -->
+        <div class="editable">
+          <span class="label">Parcours détaillé — à compléter</span>
+          <div contenteditable="true" id="bio" class="sub">Cliquez ici pour rédiger le parcours détaillé : expériences, responsabilités, formation, motivations pour la reprise d'entreprise.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= CÉDANTS ======================= -->
+<div class="page" data-page="cedants">
+  <section class="light page-head">
+    <div class="wrap grid">
+      <span class="label">Cédants</span>
+      <h1 class="t">Transmettre l'entreprise que vous avez construite.</h1>
+      <p class="d sub">Une décision personnelle autant que patrimoniale. Vous échangez avec un interlocuteur unique, qui reprendra lui-même la direction de l'entreprise.</p>
+    </div>
+  </section>
+  <section class="light">
+    <div class="plate wide"><picture>
+      <source type="image/webp" srcset="images/letsang-pierre-strates-800.webp 800w, images/letsang-pierre-strates-1200.webp 1200w, images/letsang-pierre-strates.webp 1800w" sizes="100vw">
+      <img src="images/letsang-pierre-strates-1200.jpg" srcset="images/letsang-pierre-strates-800.jpg 800w, images/letsang-pierre-strates-1200.jpg 1200w, images/letsang-pierre-strates.jpg 1800w" sizes="100vw" width="1800" height="1240" loading="lazy" alt="Mur de pierre en strates horizontales percé d'une porte">
+    </picture></div>
+    <div class="wrap plate-cap"><span>Pierre en strates, seuil</span></div>
+  </section>
+  <section class="light pad">
+    <div class="wrap commit">
+      <div class="rv"><h3>Confidentialité</h3><p>Chaque échange reste strictement confidentiel. Aucune information n'est partagée sans votre accord, et un engagement de confidentialité est signé dès les premières discussions.</p></div>
+      <div class="rv"><h3>Qualité du dialogue</h3><p>Un interlocuteur unique, du premier rendez-vous à la reprise. Des échanges directs, à votre rythme.</p></div>
+      <div class="rv"><h3>Compréhension du métier</h3><p>Avant de parler de valorisation, nous cherchons à comprendre vos produits, vos clients, vos équipes et ce qui fait votre différence.</p></div>
+      <div class="rv"><h3>Continuité opérationnelle</h3><p>Le repreneur s'installe à la direction de l'entreprise. La transition est préparée avec vous, pour préserver les relations avec clients, fournisseurs et collaborateurs.</p></div>
+      <div class="rv"><h3>Héritage entrepreneurial</h3><p>Le nom, l'histoire et le savoir-faire de l'entreprise sont des actifs. Nous nous engageons à les faire vivre.</p></div>
+      <div class="rv"><h3>Long terme et pragmatisme</h3><p>Pas de logique de rotation rapide. Une structure de reprise réaliste, adaptée à l'entreprise, et une vision sur plusieurs années.</p></div>
+    </div>
+  </section>
+  <section class="dark pad closing">
+    <div class="wrap grid">
+      <div class="t"><span class="label">Un premier échange</span><blockquote style="margin-top:28px">Une conversation n'engage à rien.</blockquote><p class="sub" style="margin-top:24px">Que la cession soit immédiate ou envisagée à plusieurs années, un premier échange permet de poser les bases d'une réflexion sereine.</p></div>
+      <div class="a"><a class="lnk" href="#contact" data-go="contact">Prendre contact <span class="ar">↗</span></a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= INVESTISSEURS ======================= -->
+<div class="page" data-page="investisseurs">
+  <section class="light page-head">
+    <div class="wrap grid">
+      <span class="label">Investisseurs</span>
+      <h1 class="t">Le modèle Search Fund.</h1>
+      <p class="d sub">Né à Stanford au milieu des années 1980, le Search Fund permet à un entrepreneur de rechercher, d'acquérir et de diriger une PME, avec le soutien d'investisseurs expérimentés.</p>
+    </div>
+  </section>
+  <section class="dark pad">
+    <div class="wrap">
+      <div class="steps rv">
+        <div><span class="n">01 — Recherche</span><h3>Identification</h3><p>Le repreneur conduit une recherche structurée de cibles, financée par un capital de recherche apporté par les investisseurs.</p></div>
+        <div><span class="n">02 — Acquisition</span><h3>Reprise</h3><p>Une fois la cible identifiée, les investisseurs disposent d'un droit prioritaire à co-investir dans l'acquisition.</p></div>
+        <div><span class="n">03 — Développement</span><h3>Direction</h3><p>Le repreneur prend la direction opérationnelle de l'entreprise et pilote son plan de développement.</p></div>
+        <div><span class="n">04 — Sortie</span><h3>Transmission</h3><p>À terme, une nouvelle transmission permet de cristalliser la valeur créée pour l'ensemble des parties.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="dark">
+    <div class="plate pano"><picture>
+      <source type="image/webp" srcset="images/letsang-beton-eau-800.webp 800w, images/letsang-beton-eau-1200.webp 1200w, images/letsang-beton-eau.webp 2400w" sizes="100vw">
+      <img src="images/letsang-beton-eau-1200.jpg" srcset="images/letsang-beton-eau-800.jpg 800w, images/letsang-beton-eau-1200.jpg 1200w, images/letsang-beton-eau.jpg 2400w" sizes="100vw" width="2400" height="1030" loading="lazy" alt="Mur en béton banché et bassin">
+    </picture></div>
+  </section>
+  <section class="light pad">
+    <div class="wrap grid split">
+      <div class="l"><span class="label">Pourquoi ce modèle</span></div>
+      <div class="r rv">
+        <h2>Un alignement d'intérêts entre repreneur et investisseurs.</h2>
+        <p class="sub">Le repreneur s'engage à plein temps sur une seule entreprise ; son intéressement dépend directement de la création de valeur. Les investisseurs choisissent, opération par opération, de participer à l'acquisition, et apportent leur expérience à travers une gouvernance active.</p>
+        <dl class="facts">
+          <div><dt>Pour les investisseurs</dt><dd>Accès à des PME rentables, hors processus d'enchères, avec un dirigeant engagé</dd></div>
+          <div><dt>Gouvernance</dt><dd>Conseil ou comité stratégique réunissant les investisseurs</dd></div>
+          <div><dt>Profils</dt><dd>Investisseurs privés, family offices, entrepreneurs, partenaires financiers</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+  <section class="dark pad closing">
+    <div class="wrap grid">
+      <div class="t"><span class="label">Échanger avec LETSANG</span><h2 style="margin-top:28px">Présentation investisseurs sur demande.</h2><p class="sub" style="margin-top:24px">Les modalités détaillées sont communiquées individuellement, dans un cadre confidentiel.</p></div>
+      <div class="a"><a class="lnk" href="#contact" data-go="contact">Demander un échange <span class="ar">↗</span></a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= CONTACT ======================= -->
+<div class="page" data-page="contact">
+  <section class="light page-head">
+    <div class="wrap grid">
+      <span class="label">Contact</span>
+      <h1 class="t">Engager une conversation.</h1>
+      <p class="d sub">Tous les échanges sont traités de manière strictement confidentielle. Nous répondons personnellement à chaque message.</p>
+    </div>
+  </section>
+  <section class="light" style="padding-bottom:clamp(88px,12vw,184px)">
+    <div class="wrap grid contact rule-top" style="padding-top:56px">
+      <div class="info">
+        <div style="display:grid;gap:10px">
+          <span class="label">Courriel</span>
+          <span class="addr" id="mail">contact@letsang.com</span>
+          <div><button class="copy" id="copyBtn" type="button">Copier l'adresse</button></div>
+        </div>
+        <div style="display:grid;gap:10px"><span class="label">Localisation</span><span>Paris, France</span></div>
+      </div>
+      <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="contact">
+        <p hidden><label>Ne pas remplir <input name="bot-field"></label></p>
+        <fieldset class="audience">
+          <legend class="label">Vous êtes</legend>
+          <input type="radio" name="aud" id="aud1" value="Dirigeant" checked><label for="aud1">Dirigeant · cédant</label>
+          <input type="radio" name="aud" id="aud2" value="Investisseur"><label for="aud2">Investisseur</label>
+          <input type="radio" name="aud" id="aud3" value="Conseil"><label for="aud3">Conseil · intermédiaire</label>
+          <input type="radio" name="aud" id="aud4" value="Autre"><label for="aud4">Autre</label>
+        </fieldset>
+        <div class="two">
+          <div class="field"><label class="label" for="f-name">Nom</label><input id="f-name" name="name" autocomplete="name" required></div>
+          <div class="field"><label class="label" for="f-org">Société</label><input id="f-org" name="org" autocomplete="organization"></div>
+        </div>
+        <div class="field"><label class="label" for="f-email">Courriel</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label class="label" for="f-msg">Message</label><textarea id="f-msg" name="msg" required></textarea></div>
+        <button class="submit" type="submit">Envoyer</button>
+        <p class="confirm" id="confirm" hidden></p>
+      </form>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer class="dark">
+  <div class="wrap grid">
+    <div class="brand">
+      <a href="#accueil" class="logo" data-go="accueil">LETSANG</a>
+      <img class="sig" src="images/letsang-lizeng-120.png" width="234" height="120" alt="力曾" loading="lazy">
+      <p class="sub" style="font-size:15px">Acquérir. Développer. Transmettre.</p>
+    </div>
+    <nav class="links" aria-label="Plan du site">
+      <a href="#approche" data-go="approche">Approche</a>
+      <a href="#criteres" data-go="criteres">Critères</a>
+      <a href="#apropos" data-go="apropos">À propos</a>
+      <a href="#cedants" data-go="cedants">Cédants</a>
+      <a href="#investisseurs" data-go="investisseurs">Investisseurs</a>
+      <a href="#contact" data-go="contact">Contact</a>
+    </nav>
+    <div class="legal">
+      <p>LETSANG est un Search Fund indépendant basé en France. Les informations présentées, notamment les critères d'investissement, sont indicatives et ne constituent ni une offre ni une sollicitation d'investissement.</p>
+      <p>Images : compositions architecturales originales réalisées pour LETSANG.</p>
+    </div>
+    <div class="base"><span>© <span id="yr">2026</span> LETSANG</span><span>letsang.com</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const pages=[...document.querySelectorAll('.page')], ids=pages.map(p=>p.dataset.page);
+  const navLinks=[...document.querySelectorAll('nav.main a')];
+  const nav=document.getElementById('mainNav'), menuBtn=document.getElementById('menuBtn'), head=document.getElementById('top');
+  const titles={accueil:'',approche:'Notre approche',criteres:"Critères d'investissement",apropos:'À propos',cedants:'Cédants',investisseurs:'Investisseurs',contact:'Contact'};
+  let current='accueil';
+
+  function headerState(){
+    const overHero = current==='accueil' && window.scrollY < (window.innerHeight*0.82) && !nav.classList.contains('open');
+    head.classList.toggle('over', overHero);
+  }
+  function show(id,push){
+    if(!ids.includes(id)) id='accueil';
+    current=id;
+    pages.forEach(p=>p.classList.toggle('active',p.dataset.page===id));
+    navLinks.forEach(a=>{ if(a.dataset.go===id) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+    document.title = titles[id] ? titles[id]+' — LETSANG' : 'LETSANG — Search Fund';
+    nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); menuBtn.textContent='Menu';
+    window.scrollTo(0,0); headerState();
+    if(push){ try{ history.replaceState(null,'','#'+id); }catch(e){} }
+  }
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('[data-go]'); if(!a) return;
+    e.preventDefault(); show(a.dataset.go,true);
+  });
+  window.addEventListener('hashchange',()=>show(location.hash.slice(1)));
+  window.addEventListener('scroll',headerState,{passive:true});
+  window.addEventListener('resize',headerState);
+  menuBtn.addEventListener('click',()=>{
+    const o=nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded',String(o)); menuBtn.textContent=o?'Fermer':'Menu'; headerState();
+  });
+  show((location.hash||'').slice(1)||'accueil');
+
+  const copyBtn=document.getElementById('copyBtn'), mail=document.getElementById('mail');
+  copyBtn.addEventListener('click',()=>{
+    const done=()=>{copyBtn.textContent='Adresse copiée';setTimeout(()=>copyBtn.textContent="Copier l'adresse",1800)};
+    const fallback=()=>{const r=document.createRange();r.selectNodeContents(mail);const s=getSelection();s.removeAllRanges();s.addRange(r);copyBtn.textContent='Adresse sélectionnée'};
+    try{navigator.clipboard.writeText(mail.textContent.trim()).then(done,fallback);}catch(e){fallback();}
+  });
+
+  // Formulaire : envoi via Netlify Forms une fois le site en ligne sur letsang.com
+  const form=document.getElementById('contactForm'), conf=document.getElementById('confirm');
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const name=form.name.value.trim(), email=form.email.value.trim(), msg=form.msg.value.trim();
+    conf.hidden=false;
+    if(!name||!email||!msg||!/^\S+@\S+\.\S+$/.test(email)){ conf.textContent='Merci de renseigner votre nom, un courriel valide et votre message.'; return; }
+    const fallback=()=>{conf.textContent='Merci, '+name+'. L\'envoi n\'a pas pu aboutir : vous pouvez nous écrire directement à '+mail.textContent.trim()+'.';};
+    if(!/(^|\.)letsang\.com$|\.netlify\.app$/.test(location.hostname)){ fallback(); return; }
+    conf.textContent='Envoi en cours…';
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()})
+      .then(r=>{ if(!r.ok) throw 0; form.reset(); conf.textContent='Merci, '+name+'. Votre message a bien été transmis. Nous vous répondrons personnellement.'; })
+      .catch(fallback);
+  });
+
+  const input=document.getElementById('photoInput'), portrait=document.getElementById('portrait');
+  input.addEventListener('change',()=>{
+    const f=input.files&&input.files[0]; if(!f) return;
+    const img=new Image(); img.alt='Portrait du fondateur'; img.src=URL.createObjectURL(f);
+    portrait.querySelector('img')?.remove(); portrait.appendChild(img);
+  });
+  ['founderName','bio'].forEach(id=>{
+    const el=document.getElementById(id);
+    try{const v=localStorage.getItem('letsang-'+id); if(v) el.textContent=v;}catch(e){}
+    el.addEventListener('input',()=>{try{localStorage.setItem('letsang-'+id,el.textContent)}catch(e){}});
+  });
+  document.getElementById('yr').textContent=new Date().getFullYear();
+})();
+</script>
+
 </body>
 </html>
